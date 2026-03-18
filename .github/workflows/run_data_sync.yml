@@ -52,10 +52,7 @@ jobs:
       - name: Run sync Garmin CN script
         if: env.RUN_TYPE == 'garmin_cn'
         run: |
-          python run_page/garmin_sync.py ${{ secrets.G_PASSWORD }} --is-cn
-        # 注意：这里假设你在 Secrets 里存的是佳明密码，脚本会自动处理
-        # 如果你之前存的是那串长 token，请把上面这行改为：
-        # python run_page/garmin_sync.py ${{ secrets.GARMIN_SECRET_STRING_CN }} --is-cn
+          python run_page/garmin_sync.py ${{ secrets.GARMIN_SECRET_STRING_CN }} --is-cn
 
       - name: Make svg GitHub profile
         if: env.RUN_TYPE != 'pass'
