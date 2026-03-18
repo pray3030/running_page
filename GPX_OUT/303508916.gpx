@@ -1,0 +1,86 @@
+<gpx xmlns:ns3="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://www.garmin.com/xmlschemas/GpxExtensions/v3" creator="Garmin Connect" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/11.xsd">
+  <extensions>
+<distance>7.54</distance>
+<average_hr>92.0</average_hr>
+<average_speed>0.7839999794960023</average_speed>
+<start_time>2023-12-23T03:00:50+00:00</start_time>
+<end_time>2023-12-23T03:00:59.616000+00:00</end_time>
+<moving_time>2.0</moving_time>
+<elapsed_time>2043.263</elapsed_time>
+</extensions>
+<metadata>
+    <link href="connect.garmin.com">
+      <text>Garmin Connect</text>
+    </link>
+    <time>2023-12-23T03:00:50.000Z</time>
+  </metadata>
+  <trk>
+    <name>张家口市 度假村单板滑雪</name>
+    <type>resort_snowboarding</type>
+    <trkseg>
+      <trkpt lat="40.93739320524036884307861328125" lon="115.43139486573636531829833984375">
+        <ele>1687.5999755859375</ele>
+        <time>2023-12-23T03:00:50.000Z</time>
+        <extensions>
+          <ns3:TrackPointExtension>
+            <ns3:hr>108</ns3:hr>
+          </ns3:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.937422625720500946044921875" lon="115.431452281773090362548828125">
+        <ele>1687.5999755859375</ele>
+        <time>2023-12-23T03:00:51.000Z</time>
+        <extensions>
+          <ns3:TrackPointExtension>
+            <ns3:hr>108</ns3:hr>
+          </ns3:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.93739303760230541229248046875" lon="115.43140660040080547332763671875">
+        <ele>1687.5999755859375</ele>
+        <time>2023-12-23T03:00:52.000Z</time>
+        <extensions>
+          <ns3:TrackPointExtension>
+            <ns3:hr>108</ns3:hr>
+          </ns3:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.94698302447795867919921875" lon="115.4289360344409942626953125">
+        <ele>1720.5999755859375</ele>
+        <time>2023-12-23T03:34:46.000Z</time>
+        <extensions>
+          <ns3:TrackPointExtension>
+            <ns3:hr>84</ns3:hr>
+          </ns3:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.94698511995375156402587890625" lon="115.42894667945802211761474609375">
+        <ele>1720.5999755859375</ele>
+        <time>2023-12-23T03:34:47.000Z</time>
+        <extensions>
+          <ns3:TrackPointExtension>
+            <ns3:hr>85</ns3:hr>
+          </ns3:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.9469877183437347412109375" lon="115.42897568084299564361572265625">
+        <ele>1720.5999755859375</ele>
+        <time>2023-12-23T03:34:48.000Z</time>
+        <extensions>
+          <ns3:TrackPointExtension>
+            <ns3:hr>85</ns3:hr>
+          </ns3:TrackPointExtension>
+        </extensions>
+      </trkpt>
+      <trkpt lat="40.9469791688024997711181640625" lon="115.42893268167972564697265625">
+        <ele>1720.4000244140625</ele>
+        <time>2023-12-23T03:34:52.000Z</time>
+        <extensions>
+          <ns3:TrackPointExtension>
+            <ns3:hr>85</ns3:hr>
+          </ns3:TrackPointExtension>
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
