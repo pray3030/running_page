@@ -82,7 +82,8 @@ jobs:
     needs: sync
     if: success() && github.ref == 'refs/heads/master'
     name: Build and publish Github Pages
-    # 调用项目自带的部署脚本
     uses: ./.github/workflows/gh-pages.yml
     with:
       save_data_in_github_cache: false
+      # 补上这行，解决 Line 86 的报错
+      data_cache_prefix: 'track_data'
