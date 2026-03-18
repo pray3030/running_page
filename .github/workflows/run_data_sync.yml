@@ -55,7 +55,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run sync Garmin CN script
-        # 使用你生成的 Secret String 登录
+        if: env.RUN_TYPE == 'garmin_cn'
         run: |
           python run_page/garmin_sync.py ${{ secrets.GARMIN_SECRET_STRING_CN }} --is-cn --ignore-geocode
 
