@@ -14,6 +14,7 @@ env:
   ATHLETE: Yang            # 改成你的名字
   TITLE: "Yang's Road to 320" # 你的跑步主页标题
   BIRTHDAY_MONTH: 1986-03  # 填入你的生日月份，生成人生格子图
+  AMAP_KEY: ${{ secrets.AMAP_KEY }}
   # ================
   
   MIN_GRID_DISTANCE: 10
