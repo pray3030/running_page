@@ -3,36 +3,40 @@ name: Run Data Sync
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 21 * * *' # 北京时间凌晨5点自动跑
+    - cron: '0 0 * * *'
   push:
     branches:
       - master
+    paths:
+      - run_page/*.py
+      - requirements.txt
 
 env:
-  # === 关键修改区 ===
-  RUN_TYPE: garmin_cn      # 强制改为佳明中国区
-  ATHLETE: Yang            # 改成你的名字
-  TITLE: "Yang's Road to 320" # 你的跑步主页标题
-  BIRTHDAY_MONTH: 1986-03  # 填入你的生日月份，生成人生格子图
-  AMAP_KEY: ${{ secrets.AMAP_KEY }}
-  # ================
-  
+  # 1. 核心配置：切换为佳明中国区
+  RUN_TYPE: garmin_cn
+  # 2. 地图配置：不填 MAPBOX_TOKEN，系统会自动启用 MapCN
+  ATHLETE: 杨
+  TITLE: 杨的 跑步生涯足迹
   MIN_GRID_DISTANCE: 10
   TITLE_GRID: Over 10km Runs
+  
+  # 3. 这里的 AMAP_KEY 仅用于“地名解析”（北京市门头沟区等字样）
+  AMAP_KEY: ${{ secrets.AMAP_KEY }}
+  
+  # 4. 数据持久化设置
   SAVE_DATA_IN_GITHUB_CACHE: false
-  DATA_CACHE_PREFIX: 'track_data'
   BUILD_GH_PAGES: true
-  SAVE_TO_PARQENT: false
+  # 自动生成“人生进度条”（你 1986 年出生，这里帮你设好）
   GENERATE_MONTH_OF_LIFE: true
+  BIRTHDAY_MONTH: 1986-03
 
 jobs:
   sync:
     name: Sync
     runs-on: ubuntu-latest
     outputs:
-      SAVE_DATA_IN_GITHUB_CACHE: ${{ steps.set_output.outputs.SAVE_DATA_IN_GITHUB_CACHE }}
-      DATA_CACHE_PREFIX: ${{ steps.set_output.outputs.DATA_CACHE_PREFIX }}
-      BUILD_GH_PAGES: ${{ steps.set_output.outputs.BUILD_GH_PAGES }}
+      SAVE_DATA_IN_GITHUB_CACHE: ${{ env.SAVE_DATA_IN_GITHUB_CACHE }}
+      BUILD_GH_PAGES: ${{ env.BUILD_GH_PAGES }}
 
     steps:
       - name: Checkout
@@ -45,42 +49,40 @@ jobs:
         with:
           python-version: '3.11'
           cache: pip
-          cache-dependency-path: 'requirements.txt'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
 
       - name: Run sync Garmin CN script
-        if: env.RUN_TYPE == 'garmin_cn'
+        # 使用你生成的 Secret String 登录
         run: |
           python run_page/garmin_sync.py ${{ secrets.GARMIN_SECRET_STRING_CN }} --is-cn
 
       - name: Make svg GitHub profile
-        if: env.RUN_TYPE != 'pass'
+        if: success()
         run: |
-          python run_page/gen_svg.py --from-db --title "${{ env.TITLE }}" --type github --athlete "${{ env.ATHLETE }}" --output assets/github.svg --use-localtime --min-distance 0.5
-          python run_page/gen_svg.py --from-db --title "${{ env.TITLE_GRID }}" --type grid --athlete "${{ env.ATHLETE }}" --output assets/grid.svg --use-localtime --min-distance "${{ env.MIN_GRID_DISTANCE }}"
+          python run_page/gen_svg.py --from-db --title "${{ env.TITLE }}" --type github --github-style "align-firstday" --athlete "${{ env.ATHLETE }}" --output assets/github.svg --use-localtime --min-distance 0.5
           python run_page/gen_svg.py --from-db --type circular --use-localtime
+
+      - name: Make month of life
+        if: env.GENERATE_MONTH_OF_LIFE == 'true'
+        run: |
+          python run_page/gen_svg.py --from-db --type monthoflife --birth "${{ env.BIRTHDAY_MONTH }}" --output assets/mol.svg --use-localtime --athlete "${{ env.ATHLETE }}" --sport-type all
 
       - name: Push new runs
         run: |
           git config --local user.email 'action@github.com'
           git config --local user.name 'GitHub Action'
           git add .
-          git commit -m 'Update 320 training data' || echo 'nothing to commit'
+          git commit -m 'update new runs [skip ci]' || echo 'nothing to commit'
           git push || echo 'nothing to push'
-
-      - name: Set Output
-        id: set_output
-        run: |
-          echo "SAVE_DATA_IN_GITHUB_CACHE=${{ env.SAVE_DATA_IN_GITHUB_CACHE }}" >> "$GITHUB_OUTPUT"
-          echo "DATA_CACHE_PREFIX=${{ env.DATA_CACHE_PREFIX }}" >> "$GITHUB_OUTPUT"
-          echo "BUILD_GH_PAGES=${{ env.BUILD_GH_PAGES }}" >> "$GITHUB_OUTPUT"
 
   publish_github_pages:
     needs: sync
-    if: needs.sync.result == 'success' && needs.sync.outputs.BUILD_GH_PAGES == 'true'
+    if: success() && github.ref == 'refs/heads/master'
+    name: Build and publish Github Pages
+    # 调用项目自带的部署脚本
     uses: ./.github/workflows/gh-pages.yml
     with:
       save_data_in_github_cache: false
-      data_cache_prefix: 'track_data'
