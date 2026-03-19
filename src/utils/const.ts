@@ -92,4 +92,6 @@ const AVERAGE_HEART_RATE_TITLE = IS_CHINESE ? '平均心率' : 'Average Heart Ra
 const YEARLY_TITLE = IS_CHINESE ? 'Year' : 'Yearly';
 const MONTHLY_TITLE = IS_CHINESE ? 'Month' : 'Monthly';
 const WEEKLY_TITLE = IS_CHINESE ? 'Week' : 'Weekly';
-const DAILY_TITLE = IS_CHINESE ? 'Day' : '
+const DAILY_TITLE = IS_CHINESE ? 'Day' : 'Daily';
+const LOCATION_TITLE = IS_CHINESE ? 'Location' : 'Location';
+const HOME_PAGE_TITLE = IS_CHINESE ? '首页' : 'Home';
