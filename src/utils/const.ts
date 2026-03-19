@@ -26,27 +26,15 @@ const MAP_LAYER_LIST = [
 const USE_GOOGLE_ANALYTICS = false;
 const GOOGLE_ANALYTICS_TRACKING_ID = '';
 
-// styling: set to `true` if you want dash-line route
 const USE_DASH_LINE = true;
-// styling: route line opacity: [0, 1]
 const LINE_OPACITY = 0.4;
-// styling: map height - responsive design
-// Use smaller height on mobile devices for better user experience
 const MAP_HEIGHT = window.innerWidth <= 768 ? 250 : 600;
-//set to `false` if you want to hide the road label characters
 const ROAD_LABEL_DISPLAY = true;
-// updated on 2024/11/17: privacy mode is set to true by default
-//set to `true` if you want to display only the routes without showing the map.
 const PRIVACY_MODE = false;
-// updated on 2024/11/17: lights are turned off by default
-//set to `false` if you want to make light off as default, only effect when `PRIVACY_MODE` = false
 const LIGHTS_ON = false;
-//set to `true` if you want to show the 'Elevation Gain' column
 const SHOW_ELEVATION_GAIN = false;
-// richer title for the activity types (like garmin style)
 const RICH_TITLE = false;
 
-// IF you are outside China please make sure IS_CHINESE = false
 const IS_CHINESE = true;
 const USE_ANIMATION_FOR_GRID = false;
 const CHINESE_INFO_MESSAGE = (yearLength: number, year: string): string => {
@@ -56,7 +44,6 @@ const CHINESE_INFO_MESSAGE = (yearLength: number, year: string): string => {
 const ENGLISH_INFO_MESSAGE = (yearLength: number, year: string): string =>
   `Running Journey with ${yearLength} Years, the table shows year ${year} data`;
 
-// English is not supported for location info messages yet
 const CHINESE_LOCATION_INFO_MESSAGE_FIRST =
   '跑过了一些地方，希望随着时间推移，点亮的地方越来越多';
 const CHINESE_LOCATION_INFO_MESSAGE_SECOND = '不要停下来，不要停下奔跑的脚步';
@@ -95,3 +82,198 @@ const WEEKLY_TITLE = IS_CHINESE ? 'Week' : 'Weekly';
 const DAILY_TITLE = IS_CHINESE ? 'Day' : 'Daily';
 const LOCATION_TITLE = IS_CHINESE ? 'Location' : 'Location';
 const HOME_PAGE_TITLE = IS_CHINESE ? '首页' : 'Home';
+
+const LOADING_TEXT = IS_CHINESE ? '加载中...' : 'Loading...';
+const NO_ROUTE_DATA = IS_CHINESE ? '暂无路线数据' : 'No route data';
+const INVALID_ROUTE_DATA = IS_CHINESE ? '路线数据无效' : 'Invalid route data';
+
+const ACTIVITY_TYPES = {
+  RUN_GENERIC_TITLE,
+  RUN_TRAIL_TITLE,
+  RUN_TREADMILL_TITLE,
+  HIKING_TITLE,
+  CYCLING_TITLE,
+  SKIING_TITLE,
+  WALKING_TITLE,
+  SWIMMING_TITLE,
+  ALL_TITLE,
+};
+
+const RUN_TITLES = {
+  FULL_MARATHON_RUN_TITLE,
+  HALF_MARATHON_RUN_TITLE,
+  MORNING_RUN_TITLE,
+  MIDDAY_RUN_TITLE,
+  AFTERNOON_RUN_TITLE,
+  EVENING_RUN_TITLE,
+  NIGHT_RUN_TITLE,
+};
+const ACTIVITY_TOTAL = {
+  ACTIVITY_COUNT_TITLE,
+  MAX_DISTANCE_TITLE,
+  MAX_SPEED_TITLE,
+  TOTAL_TIME_TITLE,
+  AVERAGE_SPEED_TITLE,
+  TOTAL_DISTANCE_TITLE,
+  AVERAGE_DISTANCE_TITLE,
+  TOTAL_ELEVATION_GAIN_TITLE,
+  AVERAGE_HEART_RATE_TITLE,
+  YEARLY_TITLE,
+  MONTHLY_TITLE,
+  WEEKLY_TITLE,
+  DAILY_TITLE,
+  LOCATION_TITLE,
+};
+
+export {
+  USE_GOOGLE_ANALYTICS,
+  GOOGLE_ANALYTICS_TRACKING_ID,
+  CHINESE_LOCATION_INFO_MESSAGE_FIRST,
+  CHINESE_LOCATION_INFO_MESSAGE_SECOND,
+  MAPBOX_TOKEN,
+  MUNICIPALITY_CITIES_ARR,
+  MAP_LAYER_LIST,
+  IS_CHINESE,
+  ROAD_LABEL_DISPLAY,
+  INFO_MESSAGE,
+  RUN_TITLES,
+  USE_ANIMATION_FOR_GRID,
+  USE_DASH_LINE,
+  LINE_OPACITY,
+  MAP_HEIGHT,
+  PRIVACY_MODE,
+  LIGHTS_ON,
+  SHOW_ELEVATION_GAIN,
+  RICH_TITLE,
+  ACTIVITY_TYPES,
+  ACTIVITY_TOTAL,
+  HOME_PAGE_TITLE,
+  LOADING_TEXT,
+  NO_ROUTE_DATA,
+  INVALID_ROUTE_DATA,
+};
+
+const nike = 'rgb(224,237,94)'; 
+const dark_vanilla = 'rgb(228,212,220)';
+
+export const NEED_FIX_MAP = false;
+export const MAIN_COLOR = nike;
+export const PROVINCE_FILL_COLOR = '#47b8e0';
+export const COUNTRY_FILL_COLOR = dark_vanilla;
+
+export const RUN_COLOR_LIGHT = '#47b8e0';
+export const RUN_COLOR_DARK = MAIN_COLOR;
+
+export const SINGLE_RUN_COLOR_LIGHT = '#52c41a'; 
+export const SINGLE_RUN_COLOR_DARK = '#ff4d4f'; 
+
+export const getRuntimeRunColor = (): string => {
+  if (typeof window === 'undefined') return RUN_COLOR_DARK;
+  const dataTheme = document.documentElement.getAttribute('data-theme');
+  const savedTheme = localStorage.getItem('theme');
+  const isDark =
+    dataTheme === 'dark' ||
+    (!dataTheme && savedTheme === 'dark') ||
+    (!dataTheme && !savedTheme);
+  return isDark ? RUN_COLOR_DARK : RUN_COLOR_LIGHT;
+};
+
+export const getRuntimeSingleRunColor = (): string => {
+  if (typeof window === 'undefined') return SINGLE_RUN_COLOR_DARK;
+  const dataTheme = document.documentElement.getAttribute('data-theme');
+  const savedTheme = localStorage.getItem('theme');
+  const isDark =
+    dataTheme === 'dark' ||
+    (!dataTheme && savedTheme === 'dark') ||
+    (!dataTheme && !savedTheme);
+  return isDark ? SINGLE_RUN_COLOR_DARK : SINGLE_RUN_COLOR_LIGHT;
+};
+
+export const RUN_COLOR = '#47b8e0';
+export const RUN_TRAIL_COLOR = 'rgb(255,153,51)';
+export const CYCLING_COLOR = 'rgb(51,255,87)';
+export const HIKING_COLOR = 'rgb(151,51,255)';
+export const WALKING_COLOR = HIKING_COLOR;
+export const SWIMMING_COLOR = 'rgb(255,51,51)';
+
+export const MAP_TILE_VENDOR = 'mapcn';
+
+export const MAP_TILE_STYLE_LIGHT = 'osm-bright';
+export const MAP_TILE_STYLE_DARK = 'dark-matter';
+
+export const MAP_TILE_ACCESS_TOKEN = '';
+
+export const MAP_TILE_STYLES = {
+  mapcn: {
+    'osm-bright':
+      'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+    'osm-liberty':
+      'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+    'dark-matter':
+      'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+  },
+  mapcn_openfreemap: {
+    'osm-bright': 'https://tiles.openfreemap.org/styles/bright',
+    'dark-matter': 'https://tiles.openfreemap.org/styles/dark',
+  },
+  mapcn_maptiler_free: {
+    'osm-bright': 'https://tiles.openfreemap.org/styles/bright',
+    'dark-matter': 'https://tiles.openfreemap.org/styles/dark',
+  },
+  maptiler: {
+    'dataviz-light': 'https://api.maptiler.com/maps/dataviz/style.json?key=',
+    'dataviz-dark':
+      'https://api.maptiler.com/maps/dataviz-dark/style.json?key=',
+    'basic-light': 'https://api.maptiler.com/maps/basic-v2/style.json?key=',
+    'basic-dark': 'https://api.maptiler.com/maps/basic-v2-dark/style.json?key=',
+    'streets-light': 'https://api.maptiler.com/maps/streets-v2/style.json?key=',
+    'streets-dark':
+      'https://api.maptiler.com/maps/streets-v2-dark/style.json?key=',
+    'outdoor-light': 'https://api.maptiler.com/maps/outdoor-v2/style.json?key=',
+    'outdoor-dark':
+      'https://api.maptiler.com/maps/outdoor-v2-dark/style.json?key=',
+    'bright-light': 'https://api.maptiler.com/maps/bright-v2/style.json?key=',
+    'bright-dark':
+      'https://api.maptiler.com/maps/bright-v2-dark/style.json?key=',
+    'topo-light': 'https://api.maptiler.com/maps/topo-v2/style.json?key=',
+    'topo-dark': 'https://api.maptiler.com/maps/topo-v2-dark/style.json?key=',
+    'winter-light': 'https://api.maptiler.com/maps/winter-v2/style.json?key=',
+    'winter-dark':
+      'https://api.maptiler.com/maps/winter-v2-dark/style.json?key=',
+    hybrid: 'https://api.maptiler.com/maps/hybrid/style.json?key=',
+  },
+  stadiamaps: {
+    alidade_smooth:
+      'https://tiles.stadiamaps.com/styles/alidade_smooth.json?api_key=',
+    alidade_smooth_dark:
+      'https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json?api_key=',
+    alidade_satellite:
+      'https://tiles.stadiamaps.com/styles/alidade_satellite.json?api_key=',
+  },
+  mapbox: {
+    'dark-v10': 'mapbox://styles/mapbox/dark-v10',
+    'dark-v11': 'mapbox://styles/mapbox/dark-v11',
+    'light-v10': 'mapbox://styles/mapbox/light-v10',
+    'light-v11': 'mapbox://styles/mapbox/light-v11',
+    'navigation-night': 'mapbox://styles/mapbox/navigation-night-v1',
+    'satellite-streets-v12': 'mapbox://styles/mapbox/satellite-streets-v12',
+  },
+  default: 'mapbox://styles/mapbox/dark-v10',
+};
+
+if (typeof window !== 'undefined') {
+  if (MAP_TILE_VENDOR === 'mapcn' && MAP_TILE_ACCESS_TOKEN !== '') {
+    console.warn(
+      '⚠️ MapCN (Carto) does not require an access token.\n' +
+        '💡 You can set MAP_TILE_ACCESS_TOKEN = "" in src/utils/const.ts'
+    );
+  }
+  if (
+    ['mapbox', 'maptiler', 'stadiamaps'].includes(MAP_TILE_VENDOR) &&
+    MAP_TILE_ACCESS_TOKEN === ''
+  ) {
+    console.error(
+      `❌ ${MAP_TILE_VENDOR.toUpperCase()} requires an access token!\n`
+    );
+  }
+}
