@@ -14,6 +14,7 @@ on:
 env:
   # 1. 核心配置：切换为佳明中国区
   RUN_TYPE: garmin_cn
+  LOGFIRE_SEND_TO_LOGFIRE: "false"
   # 2. 地图配置：不填 MAPBOX_TOKEN，系统会自动启用 MapCN
   ATHLETE: 杨
   TITLE: 杨的 跑步生涯足迹
